@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\ChatEvent;
 use App\Http\Controllers\api\Auth\UserController;
 use App\Http\Controllers\api\Cart\CartController;
 use App\Http\Controllers\api\CreateCartConTroller;
@@ -26,7 +27,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('/extension-login', [ExtensionController::class, 'login']);
 Route::post('/create-cart', [ExtensionController::class, 'createCart']);
 Route::get('/get-exchange-rate', [ExtensionController::class, 'getExchangeRate']);
-Route::get('/test', [TestController::class, 'index']);
+
+
+// chat event
+Route::post('/send',function(Request $request){
+    $message = [
+         'message'=> $request->message,
+         'sender_id'=> $request->sender_id,
+    ];
+    ChatEvent::broadcast(new ChatEvent($message));
+});
 
 ///////////////
 //public api

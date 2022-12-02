@@ -53,6 +53,7 @@
 
       <main>
         <router-view></router-view>
+        <ChatComponentVue :user_id = userInfo.id ></ChatComponentVue>
       </main>
     </section>
   </div>
@@ -60,9 +61,10 @@
 
 <script>
 import MenuUserComponent from "../components/user/MenuUserComponent.vue";
+import ChatComponentVue from "../components/chat/ChatComponent.vue";
 import { getUser } from "../config/user";
 export default {
-  components: { MenuUserComponent },
+  components: { MenuUserComponent, ChatComponentVue },
 
   data() {
     return {
